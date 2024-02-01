@@ -1,12 +1,9 @@
-<!DOCTYPE html>
+{% extends 'rango/base.html' %}
 {% load staticfiles %}
 
-<html>
-<head>
-    <title>Rango</title>
-</head>
+{% block title_block %}Homepage{% endblock %}
 
-<body>
+{% block body_block %}
     <h1>Rango says...</h1>
     <div>
         hey there partner! <br/>
@@ -21,7 +18,6 @@
             {% for category in categories %}
             <li>
                 <a href="{% url 'rango:show_category' category_name_slug=category.slug %}">{{ category.name }}</a>
-                <a href="{% url 'rango:add_page' category_name_slug=category.slug %}">(Add Page)</a>
             </li>
             {% endfor %}
         </ul>
@@ -37,23 +33,7 @@
         <ul>
             {% for page in pages %}
             <li>
-                {% if page.title == 'Official Python Tutorial' %}
-                <a href="http://docs.python.org/3/tutorial/">{{ page.title }}</a>
-                {% elif page.title == 'How to Think like a Computer Scientist' %}
-                <a href="http://www.greenteapress.com/thinkpython/">{{ page.title }}</a>
-                {% elif page.title == 'Learn Python in 10 Minutes' %}
-                <a href="http://www.korokithakis.net/tutorials/python/">{{ page.title }}</a>
-                {% elif page.title == 'Official Django Tutorial' %}
-                <a href="https://docs.djangoproject.com/en/2.1/intro/tutorial01/">{{ page.title }}</a>
-                {% elif page.title == 'Django Rocks' %}
-                <a href="http://www.djangorocks.com/">{{ page.title }}</a>
-                {% elif page.title == 'How to Tango with Django' %}
-                <a href="http://www.tangowithdjango.com/">{{ page.title }}</a>
-                {% elif page.title == 'Bottle' %}
-                <a href="http://bottlepy.org/docs/dev/">{{ page.title }}</a>
-                {% elif page.title == 'Flask' %}
-                <a href="http://flask.pocoo.org">{{ page.title }}</a>
-                {% endif %}
+                <a href="{{ page.url }}">{{ page.title }}</a>
             </li>
             {% endfor %}
         </ul>
@@ -62,11 +42,6 @@
         {% endif %}
     </div>
 
-    <div>
-        <a href="/rango/about/">About Rango</a><br />
-        <a href="/rango/add_category/">Add a New Category</a><br />
-        <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" />
+    
 
-    </div>
-</body>
-</html>
+{% endblock %}
